@@ -5,21 +5,6 @@ let validPasswords = 0;
 
 const lines = fs.readFileSync('day2.txt', { encoding: 'utf-8' }).split('\n');
 
-// lines.forEach(line => {
-//   const matches = /^(\d+)-(\d+) (\w): (\w+)$/.exec(line);
-//   const [_, min, max, letter, password] = matches;
-//   let count = 0;
-//   for (let i = 0; i < password.length; i++) {
-//     if (password[i] === letter) {
-//       count++;
-//     }
-//   }
-//   if (count >= min && count <= max) {
-//     validPasswords++;
-//   }
-// });
-
-
 lines.forEach(line => {
   const matches = /^(\d+)-(\d+) (\w): (\w+)$/.exec(line);
   const [_, min, max, letter, password] = matches;
