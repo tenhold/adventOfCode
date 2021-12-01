@@ -9,7 +9,7 @@ const fs = require('fs');
  * E:
  */
 
-const lines = fs.readFileSync('day4/day4.txt', { encoding: 'utf-8' }).split('\n\n');
+const lines = fs.readFileSync('day4.txt', { encoding: 'utf-8' }).split('\n\n');
 
 class Passport {
   static mandantory = ['byr', 'iyr', 'eyr', 'hgt', 'hcl', 'ecl', 'pid'];
