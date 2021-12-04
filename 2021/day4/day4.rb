@@ -46,7 +46,7 @@ def find_winner(boards, nums)
     game = bingo(m_board, nums)
     winner = game if winner.nil?
     if game[:time] < winner[:time]
-      winner =  game
+      winner = game
     end
   end
 
@@ -54,17 +54,17 @@ def find_winner(boards, nums)
 end
 
 def find_loser(boards, nums)
-  winner = nil
+  loser = nil
   
   boards.each do |board|
     m_board = Matrix[*board]
     game = bingo(m_board, nums)
-    winner = game if winner.nil?
-    if game[:time] > winner[:time]
-      winner =  game
+    loser = game if loser.nil?
+    if game[:time] > loser[:time]
+      loser =  game
     end
   end
-  winner[:unmarked_nums] * winner[:picked_num]
+  loser[:unmarked_nums] * loser[:picked_num]
 end
-# puts "winner: #{find_winner(boards, nums)}"
 puts "loser: #{find_loser(boards, nums)}"
+# puts "winner: #{find_winner(boards, nums)}"
