@@ -15,13 +15,7 @@ boards = inputs[1..-1].map { |b| b.split(/\n/).map { |r| r.split(' ').map { |cel
 # after each loop check each row and column to see if all are true. ---- board.column(0).all? {|e| e[:seen] == true }
 # if it is true then stop and pick that board as the winner.
 
-board_1 = Matrix[*boards[0]]
-board_2 = Matrix[*boards[1]]
-board_3 = Matrix[*boards[2]]
-
 def bingo(board, nums)
-  column = nil
-  row = nil
   nums.each.with_index do |picked_num, count|
     board.each_with_index do |cell, r, c|
       if cell[:num] == picked_num
@@ -44,15 +38,33 @@ def bingo(board, nums)
   end
 end
 
-winner = nil
-
-boards.each do |board|
-  m_board = Matrix[*board]
-  game = bingo(m_board, nums)
-  winner = game if winner.nil?
-  if game[:time] < winner[:time]
-    winner =  game
+def find_winner(boards, nums)
+  winner = nil
+  
+  boards.each do |board|
+    m_board = Matrix[*board]
+    game = bingo(m_board, nums)
+    winner = game if winner.nil?
+    if game[:time] < winner[:time]
+      winner =  game
+    end
   end
+
+  winner[:unmarked_nums] * winner[:picked_num]
 end
 
-puts winner[:unmarked_nums] * winner[:picked_num]
+def find_loser(boards, nums)
+  winner = nil
+  
+  boards.each do |board|
+    m_board = Matrix[*board]
+    game = bingo(m_board, nums)
+    winner = game if winner.nil?
+    if game[:time] > winner[:time]
+      winner =  game
+    end
+  end
+  winner[:unmarked_nums] * winner[:picked_num]
+end
+# puts "winner: #{find_winner(boards, nums)}"
+puts "loser: #{find_loser(boards, nums)}"
