@@ -22,7 +22,7 @@ def bingo(board, nums)
         cell[:seen] = true
       end
 
-      if board.column(c).all? { |ele| ele[:seen] == true } || board.row(r).all? { |ele| ele[:seen] == true }
+      if  won?(board, c, nil) || won?(board, nil, r)
         unmarked_nums = board.inject(0) do |sum, hash|
           sum += hash[:num] if hash[:seen] == false
           sum
@@ -36,6 +36,11 @@ def bingo(board, nums)
       
     end
   end
+end
+
+def won?(board, column, row)
+  return board.column(column).all?{ |e| e[:seen] == true } unless column.nil?
+  return board.row(row).all?{ |e| e[:seen] == true } unless row.nil?
 end
 
 def find_winner(boards, nums)
