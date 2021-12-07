@@ -14,38 +14,28 @@ INPUTS = File.read('inputs.txt').split(',').map(&:to_i)
   # create a new fish with a timer of 8 on the back of the list
 
 
+def count_fish(fish, days)
+  fish_at_stages = Array.new(9, 0)
+  fish.each { |f| fish_at_stages[f] += 1 }
+  days.times do
+    fish_at_stages.rotate!
+    fish_at_stages[6] += fish_at_stages.last
+  end
+  fish_at_stages.inject(:+)
+end
+puts count_fish(INPUTS, 256)
+
 # def count_fish(fish, days)
 #   new_fish = []
-#   while days > 0
-#     fish.map! do |f, i|
-#       if f == 0
-#         f = 7
-#         new_fish << 8
-#       end
-#       f -= 1
-#     end
-#     fish.push(*new_fish)
-#     new_fish = []
-#     days -= 1
+#   if days == 0
+#     return fish.length
 #   end
-#   fish
+#   fish.map! do |f, i|
+#     if f == 0
+#       f = 7
+#       new_fish << 8
+#     end
+#     f -= 1
+#   end.push(*new_fish)
+#   return count_fish(fish, days -= 1)
 # end
-
-
-def count_fish(fish, days)
-  new_fish = []
-  if days == 0
-    return fish.length
-  end
-  fish.map! do |f, i|
-    if f == 0
-      f = 7
-      new_fish << 8
-    end
-    f -= 1
-  end.push(*new_fish)
-  return count_fish(fish, days -= 1)
-end
-
-count = count_fish(INPUTS, 80)
-puts count
