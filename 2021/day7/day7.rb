@@ -20,9 +20,6 @@ def get_moves(inputs)
     end
 
   end
-  # return inputs.inject(0) do |sum, crab|
-  #   least_moves < crab ? sum += crab - least_moves : sum += least_moves - crab
-  #   sum
   return fuels.min
 end
 
