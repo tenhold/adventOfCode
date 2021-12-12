@@ -1,7 +1,7 @@
 require 'pry'
 require 'matrix'
 
-inputs = File.read('inputs.txt').split(/\n\n/)
+inputs = File.read('test_inputs.txt').split(/\n\n/)
 
 # split each num into an array
 nums = inputs[0].split(',').map { |num| num.to_i }
@@ -60,7 +60,6 @@ end
 
 def find_loser(boards, nums)
   loser = nil
-  
   boards.each do |board|
     m_board = Matrix[*board]
     game = bingo(m_board, nums)
@@ -71,5 +70,6 @@ def find_loser(boards, nums)
   end
   loser[:unmarked_nums] * loser[:picked_num]
 end
+
 puts "loser: #{find_loser(boards, nums)}"
 # puts "winner: #{find_winner(boards, nums)}"

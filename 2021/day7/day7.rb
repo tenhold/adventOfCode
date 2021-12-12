@@ -1,5 +1,9 @@
 require 'pry'
 
+class Day7
+  
+end
+
 time = Time.now.utc
 
 TEST_INPUTS = [16,1,2,0,4,2,7,1,2,14]
@@ -10,7 +14,7 @@ def get_moves(inputs)
   total_posititions = inputs.tally
 
   fuels = []
-  
+
   (inputs.min..inputs.max).each do |num|
     fuels << inputs.inject(0) do |sum, crab|
       diff = (crab - num).abs
