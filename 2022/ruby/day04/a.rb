@@ -28,3 +28,4 @@ class Cleanup
 end
 
 puts Cleanup.new('inputs.txt').result
+
