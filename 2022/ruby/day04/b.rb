@@ -1,21 +1,22 @@
-require 'pry'
+require_relative 'a'
 
-inputs = File.readlines('inputs.txt').map(&:chomp)
-
-def intersect?(a, b)
-  b.begin <= a.end && a.begin <= a.end
+class Cleanup_part2 < Cleanup
+  attr_reader :inputs
+  def initialize(file)
+    @inputs = File.readlines(file).map(&:chomp)
+  end
+  
+  def intersect?(a,b)
+    a.intersect?(b) || b.intersect?(a)
+  end
+  def result
+    inputs.reduce(0) do |total, input|
+      a, b = get_sections(input).map(&:to_a)
+      total += 1 if intersect?(a,b)
+      total
+    end
+  end
 end
 
-results = inputs.reduce(0) do |total, i|
-  a_section, b_section = i.split(',').map do |e|
-    start, stop = e.split('-')
-    (start.to_i..stop.to_i).to_a
-  end
-  if a_section.intersect?(b_section) || b_section.intersect?(a_section)
-    total += 1
-  end
-  total
-end
-
-puts results
+puts Cleanup_part2.new('inputs.txt').result
 
