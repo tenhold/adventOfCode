@@ -1,3 +1,4 @@
+require 'pry'
 class Cleanup
   attr_reader :inputs
   def initialize(file)
